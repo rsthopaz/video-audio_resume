@@ -16,16 +16,16 @@ class TranscribeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:mp4,avi,mov,mp3,wav|max:204800', // max 200MB
+            'file' => 'required|mimes:mp4,avi,mov,mp3,wav|max:204800', 
         ]);
+        ini_set('max_execution_time', 300); 
 
-        ini_set('max_execution_time', 300); // biar proses lama tidak dipotong
-
-        // Simpan file upload
         $path = $request->file('file')->store('uploads');
         $fullPath = storage_path('app/' . $path);
 
-        // Lokasi Whisper & Model
+
+        // GANTI PATHNYA GESS
+
         $whisperPath = '/mnt/d/Thopaz/Kuliah/PBKK/testing/whisper/whisper.cpp/build/bin/whisper-cli';
         $modelPath   = '/mnt/d/Thopaz/Kuliah/PBKK/testing/whisper/whisper.cpp/models/ggml-base.en.bin';
 
@@ -41,7 +41,6 @@ class TranscribeController extends Controller
 
         $outputTxt = $audioPath . '.txt';
 
-        // Jalankan whisper
         $process = Process::fromShellCommandline(
             "$whisperPath -m $modelPath -f \"$audioPath\" -otxt"
         );
@@ -51,10 +50,8 @@ class TranscribeController extends Controller
             throw new ProcessFailedException($process);
         }
 
-        // Ambil hasil transkrip
         $transcript = file_exists($outputTxt) ? file_get_contents($outputTxt) : 'Transkrip tidak ditemukan.';
 
-        // 🔥 Kirim ke Gemini untuk rangkuman
         $geminiApiKey = env('GEMINI_API_KEY');
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
