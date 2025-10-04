@@ -1,0 +1,102 @@
+Hasil Transkrip
+ Okay, so we will talk about the mathematics here about the calculator, yes, actually the code is already in the PPT, so just leave the coffee pass.
+ First of all, there is an operator, for example, 2 times 10 times 10, that means it's correct.
+ Here is the default form, we put the default form into the view form in the form.
+ Yes, it is just an argument, an argument, an operation and so on.
+ Then we will return to the submit post in this web.
+ Submit post goes to the class from the calculator controller.
+ As we can see, this is the logica of the operator, and also the operator of arithmatica, which is 1, 2 times 10 times 10 times 10 times 10.
+ For example, we will return the view from the post form to the PPT.
+ We return the form plus, we just look at the result later.
+ Here is the form, yes, for the show form, yes, just look at it later.
+ For example, go directly to the form, it will return to the PPT form at the beginning.
+ Then it will return to the PPT form.
+ Okay, it's done.
+
+Ringkasan
+Intinya, penjelasan ini membahas logika di balik kalkulator yang ada di presentasi (PPT). Kode sudah tersedia di PPT tersebut. Alur prosesnya meliputi: 1. Menerima input berupa operasi (misalnya, 2 x 10 x 10). 2. Menyimpan input dalam *form* bawaan (default). 3. *Form* ini berisi argumen dan operasi. 4. *Submit post* mengirimkan data ke kelas kalkulator *controller*. 5. Di dalam *controller* terdapat logika operator aritmatika. 6. Hasilnya ditampilkan kembali ke *view* melalui *post form* dan dikembalikan ke form di PPT. 7. Proses berulang, kembali ke form di PPT.
+
+Kembali
+
+-------------------
+Hasil Transkrip
+ Meteorology, geophysical and climatology bodies, or BMKG,
+ wrote a report on the earth's 6.5-square-meter-long land,
+ in East Java, on the night of September 30, 2025.
+ The report was written on the 23-49th of Western Indonesia,
+ at a depth of 11 kilometers.
+ The ship is located on the sea. The epicentrum is 50 kilometers away from the island of East Java.
+ Many families feel the power of a few islands, including Sumenep, Banyuwangi, and Situbondong.
+ The report was reported that there is not a trace of damage.
+ Hopefully all the residents of East Java are well.
+ [Music]
+
+Ringkasan
+BMKG melaporkan gempa bumi magnitudo 6.5 yang terjadi di Laut Jawa dekat Jawa Timur pada 30 September 2025 pukul 23:49 WIB. Gempa dengan kedalaman 11 km, episentrum 50 km dari lepas pantai Jawa Timur, dirasakan di Sumenep, Banyuwangi, dan Situbondo. Tidak ada laporan kerusakan. Kondisi warga Jawa Timur diharapkan baik-baik saja.
+
+Kembali
+-------------------
+
+Hasil Transkrip
+ do you know that the imported goods are sold in Indonesia, but it is difficult to export them in Indonesia?
+ hmmm interesting, do you know why our trade is so difficult to export in Indonesia?
+ because if you import it, it is much easier
+ the Minister of cooperation and small and medium businesses said that the supply of KM products is caused by the need of 21 certificates
+ therefore every 6 months there must be 3 certificates
+ now you can imagine how many documents we need
+ so that's all the problem
+ ohhh of course not
+ unfortunately there are still many KM companies that are not as good as the top of the business export process
+ the end is only if our documents are ready, but we don't know what we are going to do with the documents
+ that's all the two points mean, there is still about one, if the export problem is over, now we just have to pay it, do you know?
+ not only the KM companies are confused, but the buyer can also be confused with the goods we are offering.
+ what is the solution?
+ because here we have to start exporting, which is a digital platform using blockchain
+ first, we have to use per-certification issues
+ if our documents are lost, broken, and corrupted, what should we do?
+ by using smart contracts, the documents are secured by the security system, especially with blockchain
+ the documents that we enter will be immutable, which means that when the documents are uploaded, they cannot be changed to data files, or even deleted
+ second, the KM companies must know how to do the export with the right, we will give the blackbook and the procedure to the exporter to export something
+ if they still don't understand, they can also send a message to each other
+ and finally, we have to make it easier for the buyer to buy products for the exporter
+ on our website, we will show you some products to make it easier for the buyer to buy products that they want
+ that is some of the MVP products that we offer at BULA EXPORT, that's all for this video, thank you
+
+Ringkasan
+Indonesia lebih mudah mengimpor barang daripada mengekspor. Menteri Koperasi dan UMKM menyebutkan bahwa ekspor produk UMKM terkendala oleh kebutuhan 21 sertifikat, yang berarti sekitar 3 sertifikat harus diperbarui setiap 6 bulan, menghasilkan banyak dokumen yang dibutuhkan. Selain itu, banyak UMKM belum memahami proses ekspor dengan baik dan kebingungan soal pembayaran ekspor juga menjadi masalah. Pembeli pun bisa kebingungan dengan penawaran produk. Solusinya adalah menggunakan platform digital berbasis blockchain untuk mengatasi masalah sertifikasi, keamanan dokumen (melalui smart contract yang membuat dokumen tidak bisa diubah atau dihapus), edukasi UMKM tentang prosedur ekspor yang benar (melalui blackbook dan forum diskusi), serta mempermudah pembeli menemukan produk yang diinginkan melalui website. Inilah beberapa produk MVP yang ditawarkan oleh BULA EXPORT.
+
+Kembali
+-------------------------
+
+Hasil Transkrip
+ do you know that the imported goods are sold in Indonesia, but it is difficult to export them in Indonesia?
+ hmmm interesting, do you know why our trade is so difficult to export in Indonesia?
+ because if you import it, it is much easier
+ the Minister of cooperation and small and medium businesses said that the supply of KM products is caused by the need of 21 certificates
+ therefore every 6 months there must be 3 certificates
+ now you can imagine how many documents we need
+ so that's all the problem
+ ohhh of course not
+ unfortunately there are still many KM companies that are not as good as the top of the business export process
+ the end is only if our documents are ready, but we don't know what we are going to do with the documents
+ that's all the two points mean, there is still about one, if the export problem is over, now we just have to pay it, do you know?
+ not only the KM companies are confused, but the buyer can also be confused with the goods we are offering.
+ what is the solution?
+ because here we have to start exporting, which is a digital platform using blockchain
+ first, we have to use per-certification issues
+ if our documents are lost, broken, and corrupted, what should we do?
+ by using smart contracts, the documents are secured by the security system, especially with blockchain
+ the documents that we enter will be immutable, which means that when the documents are uploaded, they cannot be changed to data files, or even deleted
+ second, the KM companies must know how to do the export with the right, we will give the blackbook and the procedure to the exporter to export something
+ if they still don't understand, they can also send a message to each other
+ and finally, we have to make it easier for the buyer to buy products for the exporter
+ on our website, we will show you some products to make it easier for the buyer to buy products that they want
+ that is some of the MVP products that we offer at BULA EXPORT, that's all for this video, thank you
+
+Ringkasan
+Teks ini membahas kesulitan ekspor produk UMKM di Indonesia meskipun impor mudah. Penyebabnya adalah banyaknya sertifikasi (21 buah) yang dibutuhkan, dengan 3 sertifikat harus diperbarui setiap 6 bulan, sehingga menimbulkan kerumitan administrasi. Selain itu, banyak UMKM yang belum paham proses ekspor, meski dokumen sudah lengkap. Masalah lain adalah biaya ekspor dan kebingungan yang dialami pembeli terhadap produk yang ditawarkan. Solusinya adalah platform digital berbasis blockchain bernama BULA EXPORT. Platform ini menawarkan tiga solusi: 1. **Sertifikasi digital:** Menggunakan *smart contract* untuk mengamankan dan menyimpan dokumen sertifikasi secara permanen (tidak dapat diubah atau dihapus). 2. **Panduan Ekspor:** Menyediakan *blackbook* dan prosedur ekspor yang jelas bagi UMKM. Tersedia juga fitur pesan untuk konsultasi. 3. **Mempermudah Pembeli:** Menampilkan produk di website untuk memudahkan pembeli mencari dan membeli produk ekspor.
+
+Kembali
+------------------------
+
+
