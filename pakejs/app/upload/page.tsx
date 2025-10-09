@@ -32,30 +32,40 @@ export default function UploadPage() {
     if (files.length === 0) return;
     setIsUploading(true);
 
-    const formData = new FormData();
-    formData.append("file", files[0]);
+  const formData = new FormData();
+  formData.append("file", files[0]);
+  formData.append("denoise", "false");
+  formData.append("aggressive_denoise", "false");
+  formData.append("force_wav", "false");
+  formData.append("transcriber_model", "small");
+  formData.append("chunk_size", "2000");
+  formData.append("language", "id");
 
-    try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
 
-      if (!res.ok) throw new Error("Upload failed");
+   
+  try {
+    const res = await fetch("https://naabingg-summarize.hf.space/process", {
+      method: "POST",
+      body: formData,
+    });
 
-      const data = await res.json();
-      localStorage.setItem("transcript", data.transcript);
-      localStorage.setItem("summary", data.summary);
-      setDone(true);
+    if (!res.ok) throw new Error(`Upload failed (${res.status})`);
 
-      // langsung pindah ke halaman transcript
-      window.location.href = "/transcript";
-    } catch (err) {
-      console.error(err);
-      alert("Upload gagal");
-    } finally {
-      setIsUploading(false);
-    }
+    const data = await res.json();
+    console.log("Response:", data);
+
+    // Simpan hasil transkrip & ringkasan (jika API mengembalikan itu)
+    localStorage.setItem("transcript", data.transcript || "");
+    localStorage.setItem("summary", data.summary || "");
+
+    setDone(true);
+    window.location.href = "/transcript";
+  } catch (err) {
+    console.error(err);
+    alert("Upload gagal: " + err);
+  } finally {
+    setIsUploading(false);
+  }
   };
 
   return (
