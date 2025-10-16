@@ -179,7 +179,7 @@ export default function UploadPage() {
       localStorage.setItem("summary", data.summary || "");
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setDone(true);
-      // window.location.href = "/transcript";
+      window.location.href = "/transcript";
     } catch (err) {
       console.error(err);
       alert("Upload gagal: " + err);
@@ -468,3 +468,4 @@ export default function UploadPage() {
     </div>
   );
 }
+
