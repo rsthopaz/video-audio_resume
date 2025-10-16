@@ -1,12 +1,126 @@
 "use client";
 
 import { useState } from "react";
+const LANGUAGES: Record<string, string> = {
+  en: "english",
+  zh: "chinese",
+  de: "german",
+  es: "spanish",
+  ru: "russian",
+  ko: "korean",
+  fr: "french",
+  ja: "japanese",
+  pt: "portuguese",
+  tr: "turkish",
+  pl: "polish",
+  ca: "catalan",
+  nl: "dutch",
+  ar: "arabic",
+  sv: "swedish",
+  it: "italian",
+  id: "indonesian",
+  hi: "hindi",
+  fi: "finnish",
+  vi: "vietnamese",
+  he: "hebrew",
+  uk: "ukrainian",
+  el: "greek",
+  ms: "malay",
+  cs: "czech",
+  ro: "romanian",
+  da: "danish",
+  hu: "hungarian",
+  ta: "tamil",
+  no: "norwegian",
+  th: "thai",
+  ur: "urdu",
+  hr: "croatian",
+  bg: "bulgarian",
+  lt: "lithuanian",
+  la: "latin",
+  mi: "maori",
+  ml: "malayalam",
+  cy: "welsh",
+  sk: "slovak",
+  te: "telugu",
+  fa: "persian",
+  lv: "latvian",
+  bn: "bengali",
+  sr: "serbian",
+  az: "azerbaijani",
+  sl: "slovenian",
+  kn: "kannada",
+  et: "estonian",
+  mk: "macedonian",
+  br: "breton",
+  eu: "basque",
+  is: "icelandic",
+  hy: "armenian",
+  ne: "nepali",
+  mn: "mongolian",
+  bs: "bosnian",
+  kk: "kazakh",
+  sq: "albanian",
+  sw: "swahili",
+  gl: "galician",
+  mr: "marathi",
+  pa: "punjabi",
+  si: "sinhala",
+  km: "khmer",
+  sn: "shona",
+  yo: "yoruba",
+  so: "somali",
+  af: "afrikaans",
+  oc: "occitan",
+  ka: "georgian",
+  be: "belarusian",
+  tg: "tajik",
+  sd: "sindhi",
+  gu: "gujarati",
+  am: "amharic",
+  yi: "yiddish",
+  lo: "lao",
+  uz: "uzbek",
+  fo: "faroese",
+  ht: "haitian creole",
+  ps: "pashto",
+  tk: "turkmen",
+  nn: "nynorsk",
+  mt: "maltese",
+  sa: "sanskrit",
+  lb: "luxembourgish",
+  my: "myanmar",
+  bo: "tibetan",
+  tl: "tagalog",
+  mg: "malagasy",
+  as: "assamese",
+  tt: "tatar",
+  haw: "hawaiian",
+  ln: "lingala",
+  ha: "hausa",
+  ba: "bashkir",
+  jw: "javanese",
+  su: "sundanese",
+  yue: "cantonese",
+};
 
+const sortedLanguages = Object.entries(LANGUAGES).sort((a, b) =>
+  a[1].localeCompare(b[1])
+);
 export default function UploadPage() {
   const [files, setFiles] = useState<File[]>([]);
   const [url, setUrl] = useState("");
   const [done, setDone] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [form, setForm] = useState({ language: "auto" });
+
+  // Tambahan state untuk parameter
+  const [denoise, setDenoise] = useState(false);
+  const [aggressiveDenoise, setAggressiveDenoise] = useState(false);
+  const [forceWav, setForceWav] = useState(false);
+  const [transcriberModel, setTranscriberModel] = useState("small");
+  const [chunkSize, setChunkSize] = useState(2000);
+  const [language, setLanguage] = useState("id");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -32,40 +146,46 @@ export default function UploadPage() {
     if (files.length === 0) return;
     setIsUploading(true);
 
-  const formData = new FormData();
-  formData.append("file", files[0]);
-  formData.append("denoise", "false");
-  formData.append("aggressive_denoise", "false");
-  formData.append("force_wav", "false");
-  formData.append("transcriber_model", "small");
-  formData.append("chunk_size", "2000");
-  formData.append("language", "id");
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    formData.append("denoise", String(denoise));
+    formData.append("aggressive_denoise", String(aggressiveDenoise));
+    formData.append("force_wav", String(forceWav));
+    formData.append("transcriber_model", transcriberModel);
+    formData.append("chunk_size", String(chunkSize));
 
+    if (form.language && form.language !== "auto") {
+      formData.append("language", form.language);
+    }
 
-   
-  try {
-    const res = await fetch("https://naabingg-summarize.hf.space/process", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      const res = await fetch("https://naabingg-summarize.hf.space/process", {
+        method: "POST",
+        body: formData,
+      });
 
-    if (!res.ok) throw new Error(`Upload failed (${res.status})`);
+      if (!res.ok) throw new Error(`Upload failed (${res.status})`);
 
-    const data = await res.json();
-    console.log("Response:", data);
+      const data = await res.json();
+      console.log("=== RESPONSE FROM API ===");
+      console.log(data); // pastikan ini tampil dalam bahasa Jerman
+      console.log(data.transcript);
+      console.log(data.summary);
+      // Hapus hasil lama agar tidak tertukar
+      localStorage.removeItem("transcript");
+      localStorage.removeItem("summary");
 
-    // Simpan hasil transkrip & ringkasan (jika API mengembalikan itu)
-    localStorage.setItem("transcript", data.transcript || "");
-    localStorage.setItem("summary", data.summary || "");
-
-    setDone(true);
-    window.location.href = "/transcript";
-  } catch (err) {
-    console.error(err);
-    alert("Upload gagal: " + err);
-  } finally {
-    setIsUploading(false);
-  }
+      localStorage.setItem("transcript", data.transcript || "");
+      localStorage.setItem("summary", data.summary || "");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setDone(true);
+      // window.location.href = "/transcript";
+    } catch (err) {
+      console.error(err);
+      alert("Upload gagal: " + err);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
@@ -74,7 +194,6 @@ export default function UploadPage() {
         <div className="flex flex-col h-full">
           {/* Navbar */}
           <div className="bg-gradient-to-b from-blue-500 to-purple-600 p-4 flex flex-row items-center justify-between">
-            {/* Cancel */}
             <div className="bg-white/20 rounded-xl flex items-center justify-center text-white hover:bg-white/30 transition">
               <a href="/started" className="text-sm font-semibold mx-2 p-2">
                 Cancel
@@ -91,9 +210,7 @@ export default function UploadPage() {
                   Information
                 </span>
               </div>
-
               <div className="w-8 h-0.5 bg-white"></div>
-
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-white border-2 border-white rounded-full flex items-center justify-center">
                   <span className="text-blue-600 font-bold text-sm">2</span>
@@ -102,9 +219,7 @@ export default function UploadPage() {
                   Upload File
                 </span>
               </div>
-
               <div className="w-8 h-0.5 bg-white/30"></div>
-
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-white/20 border-2 border-white/30 rounded-full flex items-center justify-center">
                   <span className="text-white/50 font-bold text-sm">3</span>
@@ -115,7 +230,6 @@ export default function UploadPage() {
               </div>
             </nav>
 
-            {/* Back/Next */}
             <div className="flex flex-row space-x-2">
               <div className="bg-white/20 rounded-xl flex items-center justify-center text-white hover:bg-white/30 transition">
                 <a href="/started" className="text-sm font-semibold mx-2 p-2">
@@ -124,7 +238,10 @@ export default function UploadPage() {
               </div>
               {done && (
                 <div className="bg-white/20 rounded-xl flex items-center justify-center text-white hover:bg-white/30 transition">
-                  <a href="/transcript" className="text-sm font-semibold mx-2 p-2">
+                  <a
+                    href="/transcript"
+                    className="text-sm font-semibold mx-2 p-2"
+                  >
                     Next
                   </a>
                 </div>
@@ -133,7 +250,7 @@ export default function UploadPage() {
           </div>
 
           {/* Upload Area */}
-          <div className="flex-1 p-10 flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center p-10">
             {!done ? (
               <div className="w-full max-w-4xl">
                 <div className="text-center mb-8">
@@ -145,10 +262,9 @@ export default function UploadPage() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {/* Drag & Drop */}
+                <div className="w-full max-w-4xl mx-auto flex flex-col gap-8">
                   <div
-                    className="bg-white rounded-2xl shadow-lg border-2 border-dashed border-gray-300 hover:border-blue-400 transition-all duration-300"
+                    className="bg-white rounded-2xl shadow-lg border-2 border-dashed border-gray-300 hover:border-blue-400 transition-all duration-300 flex flex-col justify-center items-center text-center w-full h-64 cursor-pointer"
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={handleDrop}
                   >
@@ -175,8 +291,7 @@ export default function UploadPage() {
                     </div>
                   </div>
 
-                  {/* URL Upload */}
-                  <div className="bg-white rounded-2xl shadow-lg border border-gray-200">
+                  {/* <div className="bg-white rounded-2xl shadow-lg border border-gray-200">
                     <div className="p-8">
                       <form onSubmit={handleUrlSubmit} className="space-y-4">
                         <input
@@ -194,12 +309,112 @@ export default function UploadPage() {
                         </button>
                       </form>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
-                {/* File Preview */}
+                {/* Parameter Settings */}
                 {files.length > 0 && (
                   <div className="mt-8">
+                    <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 space-y-4">
+                      <h3 className="text-lg font-semibold text-gray-800">
+                        Processing Settings
+                      </h3>
+
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="checkbox"
+                            checked={denoise}
+                            onChange={() => setDenoise(!denoise)}
+                          />
+                          <span className="text-sm text-gray-700">Denoise</span>
+                        </label>
+
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="checkbox"
+                            checked={aggressiveDenoise}
+                            onChange={() =>
+                              setAggressiveDenoise(!aggressiveDenoise)
+                            }
+                          />
+                          <span className="text-sm text-gray-700">
+                            Aggressive Denoise
+                          </span>
+                        </label>
+
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="checkbox"
+                            checked={forceWav}
+                            onChange={() => setForceWav(!forceWav)}
+                          />
+                          <span className="text-sm text-gray-700">
+                            Force WAV
+                          </span>
+                        </label>
+
+                        <div>
+                          <label className="text-sm text-gray-700">
+                            Transcriber Model
+                          </label>
+                          <select
+                            value={transcriberModel}
+                            onChange={(e) =>
+                              setTranscriberModel(e.target.value)
+                            }
+                            className="w-full mt-1 px-3 py-2 border border-gray-300 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-500"
+                          >
+                            <option value="tiny">tiny</option>
+                            <option value="small">small</option>
+                            <option value="medium">medium</option>
+                            <option value="large">large</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="text-sm text-gray-700">
+                            Chunk Size
+                          </label>
+                          <input
+                            type="number"
+                            value={chunkSize}
+                            onChange={(e) =>
+                              setChunkSize(parseInt(e.target.value))
+                            }
+                            className="w-full mt-1 px-3 py-2 border border-gray-300 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+
+                        <div>
+                          <div>
+                            <label className="text-sm text-gray-700">
+                              Language
+                            </label>
+                            <select
+                              className="w-full p-3 border border-gray-300 text-gray-800 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                              value={form.language}
+                              onChange={(e) =>
+                                setForm({ ...form, language: e.target.value })
+                              }
+                            >
+                              <option value="auto">Auto Detect</option>
+                              {sortedLanguages.map(([code, name]) => (
+                                <option key={code} value={code}>
+                                  {name.charAt(0).toUpperCase() + name.slice(1)}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* File Preview & Upload */}
+                {files.length > 0 && (
+                  <div className="mt-6">
                     <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
                       <h3 className="text-lg font-semibold text-gray-800 mb-4">
                         Selected Files
@@ -224,7 +439,8 @@ export default function UploadPage() {
                           <div className="flex items-center space-x-3 text-gray-600">
                             <div className="w-5 h-5 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
                             <span className="italic">
-                              Harap tunggu sebentar untuk proses mengolah videonya...
+                              Harap tunggu sebentar untuk proses mengolah
+                              videonya...
                             </span>
                           </div>
                         )}
