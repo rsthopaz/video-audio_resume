@@ -9,13 +9,18 @@ export const metadata = {
   description: "AI Transcriber",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-     <body className={`${inter.className} min-h-screen overflow-y-auto bg-white`}>
-  <TranscriptionProvider>{children}</TranscriptionProvider>
-</body>
-
+      <body
+        className={`${inter.className} min-h-screen overflow-y-auto bg-white`}
+      >
+        <TranscriptionProvider>{children}</TranscriptionProvider>
+      </body>
     </html>
   );
 }

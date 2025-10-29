@@ -47,8 +47,8 @@ export default function TranscriptPage() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-sky-200 to-white min-h-screen w-screen overflow-y-auto p-10">
-      <div className="min-h-full bg-white/90 backdrop-blur-sm shadow-lg rounded-3xl overflow-visible">
+    <div className="bg-gradient-to-b from-sky-200 to-white min-h-screen max-w-screen overflow-y-auto">
+      <div className="min-h-screen bg-white/90 backdrop-blur-sm shadow-lg overflow-visible">
         <div className="flex flex-col min-h-full">
           {/* Navbar */}
           <div className="bg-gradient-to-b from-blue-500 to-purple-600 p-4 flex flex-row items-center justify-between">
@@ -58,7 +58,7 @@ export default function TranscriptPage() {
               </a>
             </div>
             <h2 className="text-white font-semibold">Transcript</h2>
-            <div></div>
+            <div className="w-20"> </div>
           </div>
 
           {/* Transcript Result */}
