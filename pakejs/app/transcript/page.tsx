@@ -46,17 +46,18 @@ export default function TranscriptPage() {
     doc.save("transcript.pdf");
   };
 
+  // 🔹 Fungsi bantu untuk otomatis bagi teks panjang jadi paragraf
   const splitIntoParagraphs = (text: string): string[] => {
-   
-    if (text.length < 700) return [text.trim()];
+    // Jika teks pendek, langsung satu paragraf
+    if (text.length < 600) return [text.trim()];
 
-    const sentences = text.split(/(?<=[.?!])\s+/); 
+    const sentences = text.split(/(?<=[.?!])\s+/); // pisah berdasarkan titik/koma
     const paragraphs: string[] = [];
     let current = "";
 
     for (const s of sentences) {
       current += s + " ";
-      if (current.length > 1000) { 
+      if (current.length > 1000) { // batas panjang tiap paragraf
         paragraphs.push(current.trim());
         current = "";
       }
@@ -77,8 +78,8 @@ export default function TranscriptPage() {
     ));
 
   return (
-    <div className="bg-gradient-to-b from-sky-200 to-white min-h-screen max-w-screen overflow-y-auto">
-      <div className="min-h-screen bg-white/90 backdrop-blur-sm shadow-lg overflow-visible">
+    <div className="bg-gradient-to-b from-sky-200 to-white min-h-screen w-screen overflow-y-auto p-10">
+      <div className="min-h-full bg-white/90 backdrop-blur-sm shadow-lg rounded-3xl overflow-visible">
         <div className="flex flex-col min-h-full">
           {/* Navbar */}
           <div className="bg-gradient-to-b from-blue-500 to-purple-600 p-4 flex flex-row items-center justify-between">
@@ -88,7 +89,7 @@ export default function TranscriptPage() {
               </a>
             </div>
             <h2 className="text-white font-semibold">Transcript</h2>
-            <div className="w-20"> </div>
+            <div></div>
           </div>
 
           {/* Transcript Result */}
@@ -101,19 +102,19 @@ export default function TranscriptPage() {
               </div>
 
               <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">
                   Transcript
                 </h3>
                 {renderParagraphs(transcript)}
 
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
                   Summary
                 </h3>
-                {{renderParagraphs(summary)}}
+                {/* {renderParagraphs(summary)} */}
 
                 <button
                   onClick={handleDownloadPDF}
-                  className="mt-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition shadow-md hover:shadow-lg"
+                  className="mt-8 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition shadow-md hover:shadow-lg"
                 >
                   Download PDF
                 </button>
@@ -125,4 +126,3 @@ export default function TranscriptPage() {
     </div>
   );
 }
-
