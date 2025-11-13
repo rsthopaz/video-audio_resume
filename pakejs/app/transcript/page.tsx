@@ -46,6 +46,36 @@ export default function TranscriptPage() {
     doc.save("transcript.pdf");
   };
 
+  const splitIntoParagraphs = (text: string): string[] => {
+   
+    if (text.length < 700) return [text.trim()];
+
+    const sentences = text.split(/(?<=[.?!])\s+/); 
+    const paragraphs: string[] = [];
+    let current = "";
+
+    for (const s of sentences) {
+      current += s + " ";
+      if (current.length > 1000) { 
+        paragraphs.push(current.trim());
+        current = "";
+      }
+    }
+
+    if (current.trim()) paragraphs.push(current.trim());
+    return paragraphs;
+  };
+
+  const renderParagraphs = (text: string) =>
+    splitIntoParagraphs(text).map((para, i) => (
+      <p
+        key={i}
+        className="text-sm text-gray-700 mb-4 leading-relaxed text-justify indent-8"
+      >
+        {para}
+      </p>
+    ));
+
   return (
     <div className="bg-gradient-to-b from-sky-200 to-white min-h-screen max-w-screen overflow-y-auto">
       <div className="min-h-screen bg-white/90 backdrop-blur-sm shadow-lg overflow-visible">
@@ -74,16 +104,12 @@ export default function TranscriptPage() {
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   Transcript
                 </h3>
-                <p className="text-sm text-gray-700 whitespace-pre-wrap mb-6">
-                  {transcript}
-                </p>
+                {renderParagraphs(transcript)}
 
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   Summary
                 </h3>
-                <p className="text-sm text-gray-700 whitespace-pre-wrap mb-6">
-                  {summary}
-                </p>
+                {{renderParagraphs(summary)}}
 
                 <button
                   onClick={handleDownloadPDF}
@@ -99,3 +125,4 @@ export default function TranscriptPage() {
     </div>
   );
 }
+
