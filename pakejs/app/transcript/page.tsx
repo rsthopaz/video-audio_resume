@@ -110,7 +110,7 @@ export default function TranscriptPage() {
                 <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
                   Summary
                 </h3>
-                {/* {renderParagraphs(summary)} */}
+                {renderParagraphs(summary)}
 
                 <button
                   onClick={handleDownloadPDF}
@@ -126,3 +126,4 @@ export default function TranscriptPage() {
     </div>
   );
 }
+
