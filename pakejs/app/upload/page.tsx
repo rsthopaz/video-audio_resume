@@ -284,6 +284,9 @@ export default function UploadPage() {
                       >
                         Choose Files
                       </button>
+                      <p className="text-xs text-gray-500 mt-3">
+                      Supported formats: MP3, MP4, WAV, M4A, AVI, MOV, WMV, FLV
+                      </p>
                     </div>
                   </div>
 
@@ -496,3 +499,4 @@ export default function UploadPage() {
     </div>
   );
 }
+
