@@ -160,7 +160,7 @@ export default function UploadPage() {
     }
 
     try {
-      const res = await fetch("https://naabingg-summarize.hf.space/process", {
+      const res = await fetch("http://127.0.0.1:8000/process", {
         method: "POST",
         body: formData,
       });
